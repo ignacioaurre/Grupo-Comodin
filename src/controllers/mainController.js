@@ -77,10 +77,13 @@ let mainController = {
       },
       tragos: async (req,res,next) => {
         try {
+          const users = await DB.User.findOne({
+            where: {id: {[OP.like]: req.session.userId}}
+          })
           const tragos = await DB.Trago.findAll()
           let carritoUserId = req.session.carrito
           let sessionUserId = req.session.userId
-          res.render('tragos', {tragos, sessionUserId, carritoUserId})
+          res.render('tragos', {tragos, sessionUserId, carritoUserId, users})
         }
         catch (error){
           res.send(error)
