@@ -17,7 +17,7 @@
     <% carrito.forEach(carro => { %>
      
         <div class="contenedor2">
-            <div class="imagen"><img src="/<%= carro.imagen%>" class="foto-prod" ></div>
+            <div class="imagen"><img src="/images/<%= carro.imagen%>" class="foto-prod" ></div>
             <div class="producto"><%= carro.nombre + " " + carro.marca %> </div>
             <% let precioFinal = carro.precio * (1 - (carro.descuento/100))%> 
             <div class="precio">$<%= precioFinal.toFixed(2) %> </div>

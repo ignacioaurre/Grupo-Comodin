@@ -32,11 +32,12 @@ let productController = {
           where: {id: {[OP.like]: req.session.userId}}
         })
         let sessionUserId = req.session.userId
+        let carritoUserId = req.session.carrito
         if (typeof products == null){
                 res.send("No encontramos un producto para mostrarte")
         }
         else {
-          res.render('detalle', {products, sessionUserId, users, otrosProducts})
+          res.render('detalle', {products, sessionUserId, users, otrosProducts, carritoUserId})
         }
       }
       catch (error) {
@@ -65,9 +66,8 @@ let productController = {
             where: {id: {[OP.like]: req.session.userId}}
           })
           let sessionUserId = req.session.userId
-          console.log(users);
-          console.log(sessionUserId);
-        res.render('product', {products, marcas, sessionUserId, users})
+          let carritoUserId = req.session.carrito
+        res.render('product', {products, marcas, sessionUserId, users, carritoUserId})
         }
         catch (error){
             res.send(error)
@@ -81,7 +81,8 @@ let productController = {
           where: {id: {[OP.like]: req.session.userId}}
         })
         let sessionUserId = req.session.userId
-        res.render('formulario-producto', {marcas, tipos, sessionUserId, users})
+        let carritoUserId = req.session.carrito
+        res.render('formulario-producto', {marcas, tipos, sessionUserId, users, carritoUserId})
         }
         catch (error){
           res.send(error)
@@ -93,6 +94,7 @@ let productController = {
           where: {id: req.session.userId}
         })
         let sessionUserId = req.session.userId
+        let carritoUserId = req.session.carrito
         if (errors.isEmpty()) {
                 try{
                     await DB.Product.create(
@@ -106,7 +108,7 @@ let productController = {
                 }
         }
         else {
-        return res.render('formulario-producto', {errors: errors.errors, sessionUserId, users})
+        return res.render('formulario-producto', {sessionUserId, users, carritoUserId})
         }
     },
       editar: async function (req, res) {
@@ -120,11 +122,12 @@ let productController = {
             where: {id: req.session.userId}
           })
           let sessionUserId = req.session.userId
+          let carritoUserId = req.session.carrito
         if (typeof products == null){
           res.send("No encontramos un producto para mostrarte")
         }
         else {
-          res.render('formulario-producto-edit', {products, marcas, tipos, sessionUserId, users})
+          res.render('formulario-producto-edit', {products, marcas, tipos, sessionUserId, users, carritoUserId})
         }
       }
         catch (error){
@@ -174,8 +177,9 @@ let productController = {
             include: ['Marca', 'Tipo']
           })
           req.session.carrito = carrito.length
+          let carritoUserId = req.session.carrito
           console.log(req.session.carrito);
-          res.render('carrito', {users, carrito, sessionUserId})
+          res.render('carrito', {users, carrito, sessionUserId, carritoUserId})
           }
         catch (error){
           res.send(error)

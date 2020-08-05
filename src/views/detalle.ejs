@@ -9,7 +9,7 @@
 </div>
 <div class="pr-media-container">
     <div class="img-pr-det-cont">
-        <img class="pr-det-img" src="/<%= products.imagen %>" alt="">
+        <img class="pr-det-img" src="/images/<%= products.imagen %>" alt="">
     </div>
    <div class="media-comprar"> 
         <h3 class="pr-det-nombre"><%= products.nombre %> </h3>
@@ -50,7 +50,7 @@
             <p class="cant-prod">Unidades disponibles</p>
             <button class="btn-cant-1">+</button>
                 <div class="nro-cant">
-                    <input type="number" name="unidades_requeridas" form="form1" min="0" max="<%= products.unidades_disponibles %>" value="<%= products.unidades_disponibles %>">
+                    <input type="number" id="unidad" name="unidades_requeridas" form="form1" min="0" max="<%= products.unidades_disponibles %>" value="<%= products.unidades_disponibles %>">
                 </div>
             <button class="btn-cant">-</button>
         </div> 
@@ -69,4 +69,5 @@
     </div>
 
 <script src="/scripts/confirmDelete.js"></script>
+<script src="/scripts/sumar-restar.js"></script>
 <%- include('./partials/footer') %>  

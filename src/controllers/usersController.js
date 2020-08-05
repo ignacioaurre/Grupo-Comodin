@@ -14,7 +14,10 @@ const OP = DB.Sequelize.Op
 // Fijarse bien los metodos y las páginas
 
 let usersController = {
-    register: ( req, res) => res.render('formulario-usuario'),
+    register: ( req, res) => {
+        let carritoUserId = req.session.carrito
+     res.render('formulario-usuario', {carritoUserId})
+    },
     guardar: async ( req, res, next) => {
         let errors = validationResult(req);
         if (errors.isEmpty()) {
@@ -34,7 +37,10 @@ let usersController = {
         return res.render('formulario-usuario', {errors: errors.errors})
         }
     },
-    login: (req, res) => res.render('login'),
+    login: (req, res) => {
+        let carritoUserId = req.session.carrito
+         res.render('login', {carritoUserId})
+    },
     auth: async (req, res, next) => {
         let validation = validationResult(req);
         let errors = validation.errors
@@ -49,11 +55,12 @@ let usersController = {
                 req.session.category = users.rol
                 req.session.carrito = carrito.length
                 let sessionUserId = users.id
+                let carritoUserId = req.session.carrito
                 if (req.body.recordarme){
                     res.cookie('userCookie', users.id, {maxAge:1000000000000000})
                 }
                 if (!req.session.redirectTo){
-                    res.render('perfil', {users, sessionUserId})
+                    res.render('perfil', {users, sessionUserId, carritoUserId})
                 }
                 else{
                     res.redirect(req.session.redirectTo)
@@ -84,7 +91,8 @@ let usersController = {
                 where: {id: req.session.userId}
             })
             let sessionUserId = users.id
-            res.render('perfil', {users, sessionUserId})
+            let carritoUserId = req.session.carrito
+            res.render('perfil', {users, sessionUserId, carritoUserId})
         }
         catch (error){
             res.send(error)
@@ -95,11 +103,13 @@ let usersController = {
             where: {id: req.session.userId}
         })
         let sessionUserId = req.session.userId
-        res.render('perfil-edit', {users, sessionUserId})
+        let carritoUserId = req.session.carrito
+        res.render('perfil-edit', {users, sessionUserId, carritoUserId})
     },
     editado: async function (req, res) {
         let errors = validationResult(req)
         let sessionUserId = req.session.userId
+        let carritoUserId = req.session.carrito
         const userViejo = await DB.User.findOne({
                 where: {id: req.session.userId}
             })
@@ -146,7 +156,7 @@ let usersController = {
         const users = await DB.User.findOne({
             where: {id: req.session.userId}
             })
-            res.render('perfil', {users, sessionUserId})
+            res.render('perfil', {users, sessionUserId, carritoUserId})
     },
     pruebas: async (req,res,next) => {
     try {

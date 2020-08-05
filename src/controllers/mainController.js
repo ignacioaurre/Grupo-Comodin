@@ -13,7 +13,9 @@ const OP = DB.Sequelize.Op
 
 let mainController = {
   contacto: function(req,res){
-      res.render('contacto')
+      let sessionUserId = req.session.userId
+      let carritoUserId = req.session.carrito
+      res.render('contacto', {sessionUserId, carritoUserId})
   },
     home: async function(req, res, next) {
         try{
@@ -26,8 +28,9 @@ let mainController = {
             where: {id: {[OP.like]: req.session.userId}}
           })
           let sessionUserId = req.session.userId
+          let carritoUserId = req.session.carrito
 
-        res.render('index', {products, users, sessionUserId});
+        res.render('index', {products, users, sessionUserId, carritoUserId});
         }
         catch (error){
           res.send(error)
@@ -46,7 +49,8 @@ let mainController = {
             where: {id: {[OP.like]: req.session.userId}}
           })
           let sessionUserId = req.session.userId
-          res.render('promos', {products, users, sessionUserId})
+          let carritoUserId = req.session.carrito
+          res.render('promos', {products, users, sessionUserId, carritoUserId})
         }
         catch (error){
           res.send(error)
@@ -74,7 +78,9 @@ let mainController = {
       tragos: async (req,res,next) => {
         try {
           const tragos = await DB.Trago.findAll()
-          res.render('tragos', {tragos})
+          let carritoUserId = req.session.carrito
+          let sessionUserId = req.session.userId
+          res.render('tragos', {tragos, sessionUserId, carritoUserId})
         }
         catch (error){
           res.send(error)

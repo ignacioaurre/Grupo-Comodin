@@ -40,7 +40,12 @@
                 <img src="../../images/lupa (4).png" alt="" class="lupa">
             </div>
             <div class="carrito-lupa-c">
-            <a href="/products/carrito"><img src="../../images/carrito1.png" alt="" class="carrito"></a>
+            <a href="/products/carrito">
+                <img src="../../images/carrito1.png" alt="" class="carrito">
+               <% if (carritoUserId) { %>
+                <label class="txt"><%= carritoUserId %></label>
+               <% } %>
+            </a>
             </div>
 </div>
 </div>
