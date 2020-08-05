@@ -171,6 +171,7 @@ let productController = {
           const users = await DB.User.findOne({
             where: {id: req.session.userId}
           })
+          const marcas = await DB.Marca.findAll({})
           let sessionUserId = req.session.userId
           const carrito = await DB.Carrito.findAll({
             where: {user_id: req.session.userId},
@@ -178,8 +179,8 @@ let productController = {
           })
           req.session.carrito = carrito.length
           let carritoUserId = req.session.carrito
-          console.log(req.session.carrito);
-          res.render('carrito', {users, carrito, sessionUserId, carritoUserId})
+          console.log(marcas);
+          res.render('carrito', {users, carrito, sessionUserId, carritoUserId, marcas})
           }
         catch (error){
           res.send(error)
