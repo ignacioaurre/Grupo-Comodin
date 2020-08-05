@@ -1,0 +1,33 @@
+body{
+    color: whitesmoke;
+}
+.contacto-container{
+    margin: 8%;
+}
+.titulo-contacto{
+    text-align: center;
+    margin-bottom: 6%;
+}
+
+.contact-form form button,
+.contact-form form input,
+.contact-form form textarea{
+    width: 100%;
+    padding: 3%;
+    border: none;
+    background: none;
+    border-bottom: 1px solid whitesmoke;
+    color: whitesmoke;
+    outline: 0;
+}
+.nosotros{
+    background-color: #1b1919;
+    margin: 0;
+}
+.contact-form form button{
+    background-color: #c62828;
+    border: 0;
+    text-transform: uppercase;
+    margin-top: 3%;
+    padding: 5%;
+}
