@@ -2,6 +2,7 @@
 
 </div>
 <link rel="stylesheet" href="/stylesheets/detalle.css">
+<link rel="stylesheet" href="/stylesheets/interesar.css">
 
 
 <div class="detail-container">
@@ -34,14 +35,14 @@
                 <div class="icon-txt-log">
                     <p>Envio a domicilio</p> 
                     <div class="check">
-                    <input class="btn-logistica" type="checkbox">
-                </div>
+                        <input class="btn-logistica" type="checkbox">
+                    </div>
                 </div>
                 <div class="retiro">
                     <p>Retiro en el local</p>
                     <div class="check1">
-                    <input class="btn-logistica-1" type="checkbox">
-                </div>
+                        <input class="btn-logistica-1" type="checkbox">
+                    </div>
                 </div>
             </div>
             </div>
@@ -67,7 +68,7 @@
         
         <% } %>
     </div>
-
+<%- include('./partials/podria-interesar') %>
 <script src="/scripts/confirmDelete.js"></script>
 <script src="/scripts/sumar-restar.js"></script>
 <%- include('./partials/footer') %>  
